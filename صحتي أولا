@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>صحتي أولاً - الماسح الذكي المغربي</title>
+    <meta name="theme-color" content="#9C4221">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- روابط CSS وJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
+    
+    <style>
+        /* CSS الخاص بالتطبيق */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root {
+            --primary: #9C4221; --primary-dark: #7A3419; --secondary: #C17A3E;
+            --accent: #D4A76A; --danger: #C84B31; --light: #F8F3E9; --dark: #3A2C1A;
+            --background: #FDF8F0; --surface: #FFFFFF; --text: #3A2C1A;
+            --border: #E6D9C8;
+        }
+        
+        body { background: var(--background); color: var(--text); line-height: 1.6; }
+        
+        .container { max-width: 100%; margin: 0 auto; padding: 0 15px; }
+        
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 20px 0; }
+        .logo { color: white; font-size: 1.5rem; font-weight: bold; text-align: center; }
+        
+        .tab-navigation { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); }
+        .tab-item { flex: 1; text-align: center; padding: 15px; cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab-item.active { border-bottom-color: var(--primary); color: var(--primary); }
+        
+        .content-section { display: none; padding: 25px 0; }
+        .content-section.active { display: block; }
+        
+        .scanner-container { background: #000; border-radius: 15px; height: 400px; margin: 20px 0; position: relative; overflow: hidden; }
+        
+        .scan-btn { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.1rem; margin: 10px; cursor: pointer; width: 100%; }
+        
+        /* إعلانات */
+        .ad-container { margin: 20px auto; padding: 15px; background: var(--surface); border-radius: 10px; text-align: center; border: 1px solid var(--border); }
+        
+        footer { text-align: center; padding: 20px; color: var(--text); margin-top: 40px; border-top: 1px solid var(--border); }
+        footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+    </style>
+</head>
+<body>
+    <!-- الرأس -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i> صحتي أولاً
+            </div>
+        </div>
+    </header>
+    
+    <!-- علامات التبويب -->
+    <div class="tab-navigation">
+        <div class="tab-item active" data-tab="scanner">
+            <i class="fas fa-barcode"></i><br>الماسح
+        </div>
+        <div class="tab-item" data-tab="tips">
+            <i class="fas fa-apple-alt"></i><br>نصائح
+        </div>
+        <div class="tab-item" data-tab="profile">
+            <i class="fas fa-user"></i><br>حسابي
+        </div>
+    </div>
+    
+    <!-- المحتوى -->
+    <div class="container">
+        <!-- قسم الماسح -->
+        <section id="scanner" class="content-section active">
+            <h2 style="text-align: center; margin: 20px 0;">الماسح الذكي المغربي</h2>
+            <p style="text-align: center; color: var(--text); margin-bottom: 20px;">
+                وجه الكاميرا نحو الباركود لتحليل المنتج
+            </p>
+            
+            <!-- حاوية الماسح -->
+            <div class="scanner-container">
+                <div id="scannerView" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-barcode" style="font-size: 4rem;"></i>
+                </div>
+            </div>
+            
+            <!-- أزرار التحكم -->
+            <button class="scan-btn" id="startScan">
+                <i class="fas fa-camera"></i> تشغيل الماسح
+            </button>
+            
+            <!-- إعلان -->
+            <div class="ad-container">
+                <small style="color: #666;">إعلان</small>
+                <div id="ad1" style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <!-- إعلان Google سيظهر هنا -->
+                    <p style="color: #999;">جاري تحميل الإعلانات...</p>
+                </div>
+            </div>
+            
+            <button class="scan-btn" style="background: var(--secondary);" id="manualInput">
+                <i class="fas fa-keyboard"></i> إدخال يدوي
+            </button>
+        </section>
+        
+        <!-- قسم النصائح -->
+        <section id="tips" class="content-section">
+            <h2 style="text-align: center; margin: 20px 0;">نصائح غذائية مغربية</h2>
+            
+            <!-- إعلان -->
+            <div class="ad-container">
+                <small style="color: #666;">إعلان</small>
+                <div id="ad2" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #999;">إعلان النصائح الصحية</p>
+                </div>
+            </div>
+            
+            <div style="background: var(--surface); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3><i class="fas fa-utensils"></i> طاجين الخضار الصحي</h3>
+                <p>طبق مغربي تقليدي غني بالخضروات الطازجة والتوابل المفيدة للصحة.</p>
+            </div>
+        </section>
+        
+        <!-- قسم حسابي -->
+        <section id="profile" class="content-section">
+            <h2 style="text-align: center; margin: 20px 0;">حسابي</h2>
+            
+            <!-- إعلان -->
+            <div class="ad-container">
+                <small style="color: #666;">إعلان</small>
+                <div id="ad3" style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #999;">إعلان حسابي</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <p>عدد المسحات: <span id="scanCount">0</span></p>
+                <p>المنتجات المفضلة: <span id="favCount">0</span></p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- الفوتر -->
+    <footer>
+        <div>
+            <a href="privacy.html">سياسة الخصوصية</a> | 
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+        <p style="margin-top: 10px; font-size: 0.9rem;">© 2024 صحتي أولاً - تطبيق مغربي</p>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // تبديل التبويبات
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // إخفاء جميع الأقسام
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // إلغاء تنشيط جميع التبويبات
+                document.querySelectorAll('.tab-item').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // تفعيل التبويب الحالي
+                this.classList.add('active');
+                
+                // إظهار القسم المناسب
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // محاكاة الماسح
+        document.getElementById('startScan').addEventListener('click', function() {
+            const scannerView = document.getElementById('scannerView');
+            scannerView.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-camera" style="font-size: 3rem; animation: pulse 1s infinite;"></i>
+                    <p style="margin-top: 20px;">جارٍ تشغيل الكاميرا...</p>
+                    <button class="scan-btn" style="background: var(--danger); margin-top: 20px;" id="stopScan">
+                        <i class="fas fa-stop"></i> إيقاف
+                    </button>
+                </div>
+            `;
+            
+            // محاكاة مسح ناجح بعد 3 ثوانٍ
+            setTimeout(() => {
+                scannerView.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #2A9D8F;"></i>
+                        <p style="margin-top: 20px;">تم المسح بنجاح!</p>
+                        <p style="font-size: 0.9rem;">منتج: حليب المراعي المغربي</p>
+                        <p style="font-size: 0.9rem;">التقييم الصحي: 85/100</p>
+                    </div>
+                `;
+                
+                // زيادة العداد
+                const count = parseInt(document.getElementById('scanCount').textContent);
+                document.getElementById('scanCount').textContent = count + 1;
+                
+                // عرض إعلان
+                showAd();
+            }, 3000);
+        });
+        
+        // إظهار إعلان
+        function showAd() {
+            const ads = document.querySelectorAll('.ad-container');
+            ads.forEach(ad => {
+                ad.innerHTML = `
+                    <small style="color: #666;">إعلان</small>
+                    <div style="min-height: 100px; display: flex; align-items: center; justify-content: center; background: #f0f0f0; border-radius: 5px;">
+                        <p style="color: #666;">شكراً لدعمك! هذا إعلان تجريبي</p>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #999; margin-top: 5px;">الإعلانات تساعدنا على تطوير التطبيق</p>
+                `;
+            });
+        }
+        
+        // محاكاة الإعلانات عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            setTimeout(showAd, 1000);
+        });
+        
+        console.log('تطبيق صحتي أولاً جاهز للعمل!');
+    </script>
+</body>
+</html>
